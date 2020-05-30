@@ -4,6 +4,7 @@ import 'package:shake/shake.dart';
 import 'dart:developer' as dev;
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'package:screen/screen.dart';
 
 void main() {
   runApp(DiceRollingApp());
@@ -29,6 +30,8 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
 
   @override
   Widget build(BuildContext context) {
+    Screen.keepOn(true);
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.redAccent
     ));
@@ -86,7 +89,7 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
       rolling = true;
     });
 
-    int interval = 200;
+    int interval = 250;
     int limit = interval * 6;
     for( int mlseconds = interval ; mlseconds <= limit; mlseconds+=interval ) {
       new Timer(new Duration(milliseconds: mlseconds), () {
