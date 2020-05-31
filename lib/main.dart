@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:screen/screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ads/ads.dart';
 import 'app_localizations.dart';
 
 void main() {
@@ -25,6 +26,9 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
 
   void initState() {
     super.initState();
+
+    Ads('ca-app-pub-3940256099942544~3347511713', testing: true).showBannerAd();
+
     ShakeDetector.autoStart(onPhoneShake: () {
       dev.log('shake');
       setImage();
@@ -95,7 +99,7 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
                     )),
                 Spacer(),
                 Container(
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 55),
                     child: Text(
                       'Touch the dice or shake it',
                       //AppLocalizations.of(context).translate('tip'),
