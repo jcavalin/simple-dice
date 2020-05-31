@@ -20,9 +20,11 @@ class DiceRollingApp extends StatefulWidget {
 
 class _DiceRollingAppState extends State<DiceRollingApp> {
   int nextDiceImage = 1;
+  int lastDiceValue;
   String message = '';
+  String messageLast = '';
   bool rolling = false;
-  BuildContext context = null;
+  BuildContext context;
 
   void initState() {
     super.initState();
@@ -73,16 +75,15 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
             appBar: AppBar(
                 elevation: 0.0,
                 backgroundColor: Colors.redAccent,
-                title: Center(child: Text(
-                    'A really simple dice'
-                    // AppLocalizations.of(context).translate('title')
-                ))),
+                title: Center(
+                    child: Text('A really simple dice'
+                        // AppLocalizations.of(context).translate('title')
+                        ))),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Spacer(),
                 Expanded(
-                  flex: 1,
                   child: Center(
                       child: FlatButton(
                     child: Image.asset('assets/dice/dice-$nextDiceImage.png'),
@@ -92,10 +93,15 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
                   )),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 5),
                     child: Text(
                       message,
                       style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
+                Container(
+                    child: Text(
+                      messageLast,
+                      style: TextStyle(color: Colors.white, fontSize: 10),
                     )),
                 Spacer(),
                 Container(
@@ -103,7 +109,7 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
                     child: Text(
                       'Touch the dice or shake it',
                       //AppLocalizations.of(context).translate('tip'),
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     )),
               ],
             )));
@@ -114,8 +120,13 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
       return;
     }
 
+    if (message != '') {
+      lastDiceValue = nextDiceImage;
+    }
+
     setState(() {
       message = '';
+      messageLast = '';
       rolling = true;
     });
 
@@ -127,8 +138,16 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
           nextDiceImage = Random().nextInt(6) + 1;
 
           if (mlseconds == limit) {
-            message = /*AppLocalizations.of(this.context).translate('result') +*/
+            message =
+                /*AppLocalizations.of(this.context).translate('result') +*/
                 'Your number is $nextDiceImage';
+
+            if (lastDiceValue != null) {
+              messageLast =
+                  /*AppLocalizations.of(this.context).translate('last_result') +*/
+                  'Your last number was $lastDiceValue';
+            }
+
             rolling = false;
           }
 
