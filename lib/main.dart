@@ -29,7 +29,9 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
   void initState() {
     super.initState();
 
-    Ads('ca-app-pub-3940256099942544~3347511713', testing: true).showBannerAd();
+    Ads('ca-app-pub-3940256099942544~3347511713',
+            bannerUnitId: 'ca-app-pub-3940256099942544/6300978111')
+        .showBannerAd();
 
     ShakeDetector.autoStart(onPhoneShake: () {
       dev.log('shake');
@@ -100,9 +102,9 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
                     )),
                 Container(
                     child: Text(
-                      messageLast,
-                      style: TextStyle(color: Colors.white, fontSize: 10),
-                    )),
+                  messageLast,
+                  style: TextStyle(color: Colors.white, fontSize: 10),
+                )),
                 Spacer(),
                 Container(
                     margin: const EdgeInsets.only(bottom: 55),
