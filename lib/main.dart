@@ -51,7 +51,7 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
           GlobalWidgetsLocalizations.delegate
         ],
         localeResolutionCallback: (locale, supportLocales) {
-          if(locale == null) {
+          if (locale == null) {
             return supportLocales.first;
           }
 
@@ -69,9 +69,10 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
             appBar: AppBar(
                 elevation: 0.0,
                 backgroundColor: Colors.redAccent,
-                title: Center(
-                    child:
-                        Text(AppLocalizations.of(context).translate('title')))),
+                title: Center(child: Text(
+                    'A really simple dice'
+                    // AppLocalizations.of(context).translate('title')
+                ))),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -96,7 +97,8 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
                 Container(
                     margin: const EdgeInsets.only(bottom: 20),
                     child: Text(
-                      AppLocalizations.of(context).translate('tip'),
+                      'Touch the dice or shake it',
+                      //AppLocalizations.of(context).translate('tip'),
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     )),
               ],
@@ -121,7 +123,8 @@ class _DiceRollingAppState extends State<DiceRollingApp> {
           nextDiceImage = Random().nextInt(6) + 1;
 
           if (mlseconds == limit) {
-            message = AppLocalizations.of(this.context).translate('result') + ' $nextDiceImage';
+            message = /*AppLocalizations.of(this.context).translate('result') +*/
+                'Your number is $nextDiceImage';
             rolling = false;
           }
 
